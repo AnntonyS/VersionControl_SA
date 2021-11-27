@@ -34,6 +34,7 @@ namespace UserMaintenance_SA
             this.lblFullName = new System.Windows.Forms.Label();
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.btnToFile = new System.Windows.Forms.Button();
+            this.btnDel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listbUsers
@@ -81,11 +82,22 @@ namespace UserMaintenance_SA
             this.btnToFile.UseVisualStyleBackColor = true;
             this.btnToFile.Click += new System.EventHandler(this.btnToFile_Click);
             // 
+            // btnDel
+            // 
+            this.btnDel.Location = new System.Drawing.Point(330, 354);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(329, 44);
+            this.btnDel.TabIndex = 9;
+            this.btnDel.Text = "button1";
+            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1670, 982);
+            this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnToFile);
             this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.lblFullName);
@@ -104,6 +116,7 @@ namespace UserMaintenance_SA
         private System.Windows.Forms.Label lblFullName;
         private System.Windows.Forms.TextBox txtFullName;
         private System.Windows.Forms.Button btnToFile;
+        private System.Windows.Forms.Button btnDel;
     }
 }
 
