@@ -8,7 +8,7 @@ namespace UserMaintenance_SA.Entities
 {
     class User
     {
-        public Guid guid { get; set; } = Guid.NewGuid();
+        public Guid ID { get; set; } = Guid.NewGuid();
 
         public string FirstName { get; set; }
 
