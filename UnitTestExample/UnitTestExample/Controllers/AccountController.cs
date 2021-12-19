@@ -25,7 +25,7 @@ namespace UnitTestExample.Controllers
             if(!ValidateEmail(email))
                 throw new ValidationException(
                     "A megadott e-mail cím nem megfelelő!");
-            if(!ValidateEmail(email))
+            if(!ValidatePassword(password))
                 throw new ValidationException(
                     "A megadottt jelszó nem megfelelő!\n" +
                     "A jelszó legalább 8 karakter hosszú kell legyen, csak az angol ABC betűiből és számokból állhat, és tartalmaznia kell legalább egy kisbetűt, egy nagybetűt és egy számot.");
@@ -48,8 +48,13 @@ namespace UnitTestExample.Controllers
                 @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
         }
 
+        //rubular.com
         public bool ValidatePassword(string password)
         {
+            if (!Regex.IsMatch(password, @"[a-z,A-Z,0-9]{8,}")) return false;
+            if (!Regex.IsMatch(password, @"[a-z]{1,}")) return false;
+            if (!Regex.IsMatch(password, @"[A-Z]{1,}")) return false;
+            if (!Regex.IsMatch(password, @"[0-9]{1,}")) return false;
             return true;
         }
     }
