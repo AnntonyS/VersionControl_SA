@@ -17,18 +17,27 @@ namespace MikroSzimulacio
         List<Person> Population; //= new List<Person>();
         List<BirthProbabilities> BirthProbabilities = new List<BirthProbabilities>();
         List<DeathProbabilities> DeathProbabilities = new List<DeathProbabilities>();
+        List<int> ferfiak = new List<int>();
+        List<int> nok = new List<int>();
 
         Random rng = new Random(1234);
 
         public Form1()
         {
             InitializeComponent();
-            Population = GetPopulation(@"C:\Temp\nép-teszt.csv");
+            //MessageBox.Show(DeathProbabilities.Count.ToString());
+            //Simulation();
+        }
+
+        private void Simulation(int zaroev, string fajlnev)
+        {
+            ferfiak.Clear();
+            nok.Clear();
+            Population = GetPopulation(textBox1.Text); //@"C:\Temp\nép-teszt.csv"
             BirthProbabilities = GetBirthProbabilities(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeathProbabilities(@"C:\Temp\halál.csv");
-            MessageBox.Show(DeathProbabilities.Count.ToString());
 
-            for (int year = 2005 ; year <= 2024; year++)
+            for (int year = 2005; year <= zaroev; year++)
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
@@ -38,11 +47,26 @@ namespace MikroSzimulacio
                 int ferfiakszama = (from x in Population where x.Gender == Gender.Male select x).Count();
                 int nokszama = (from x in Population where x.Gender == Gender.Female select x).Count();
 
+                ferfiak.Add(ferfiakszama);
+                nok.Add(nokszama);
+
                 Console.WriteLine(string.Format("Év: {0} Férfiak: {1} Nők: {2} ", year, ferfiakszama, nokszama));
             }
-            
+            DisplayResults(zaroev);
         }
 
+        void DisplayResults(int zaroev)
+        {
+            int counter = 0;
+            for (int year = 2005; year <= zaroev; year++)
+            {
+                richTextBox1.Text += String.Format("Szimulációs év: {0} \n\t Férfiak: {1} \n\t Nők:{2} \n\n ", year, ferfiak[counter], nok[counter]);
+                counter++;
+            }
+        
+        
+        
+        }
         private void SzimulaciosLepes(Person person, int year)
         {
             if (!person.IsAlive) return;
@@ -138,6 +162,17 @@ namespace MikroSzimulacio
 
             }
             return result;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Simulation((int)numericUpDown1.Value, textBox1.Text);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK) textBox1.Text = ofd.FileName;
         }
     }
 }
